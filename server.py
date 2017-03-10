@@ -22,11 +22,23 @@ nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(
         password=os.getenv('NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD'))
 
 @app.route("/")
-def eval_default():
+def default_welcome():
+        return 'Welcome to the NLU App !'
+
+@app.route("/entities")
+def eval_entities():
         response = nlu.analyze(
                 text='Bruce Banner is the Hulk and Bruce Wayne is BATMAN! '
                 'Superman fears not Banner, but Wayne.',
-                features=[features.Entities(), features.Keywords()])
+                features=[features.Entities()])
+        return jsonify(response)
+
+@app.route("/keywords")
+def eval_keywords():
+        response = nlu.analyze(
+                text='Bruce Banner is the Hulk and Bruce Wayne is BATMAN! '
+                'Superman fears not Banner, but Wayne.',
+                features=[features.Keywords()])
         return jsonify(response)
 
 @app.route("/categories")
