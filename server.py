@@ -47,7 +47,7 @@ def eval_concepts():
 def eval_emotion():
         response = nlu.analyze(
                 text='I love apples, but I hate oranges.',
-                targets='\"apples\", and \"oranges\"',
+                targets=['apples','oranges'],
                 features=[features.Emotion()])
         return jsonify(response) 
 
@@ -55,7 +55,7 @@ def eval_emotion():
 def eval_metadata():
         response = nlu.analyze(
                 url='https://www.ibm.com/blogs/think/2017/01/cognitive-grid/',
-                features=[features.Metadata()])
+                features=[features.metadata()])
         return jsonify(response)
 
 @app.route("/relations")
@@ -69,7 +69,7 @@ def eval_relations():
 def eval_semantic_roles():
         response = nlu.analyze(
                 text='In 2011, Watson competed on Jeopardy!',
-                features=[features.Semantic_Roles()])
+                features=[features.Semantic_roles()])
         return jsonify(response)
 
 @app.route("/sentiment")
